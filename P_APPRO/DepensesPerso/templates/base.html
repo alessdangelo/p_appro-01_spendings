@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Dépenses Perso</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <div class="mainContainer">
+            <div class="backgroundContainer">
+                <div class="waveBackground">
+                    <svg class="waveBackgroundSvg" viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
+                        <path d="M0, 100 C150, 200 350,
+                            0 500, 100 L500, 00 L0, 0 Z">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
