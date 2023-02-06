@@ -11,8 +11,9 @@
     --backroundColor1: #b5c9ff;
     --backroundColor2: #cbdeff;
 
-    --violetGrey: #f5f5fc;
+    --violetGrey: #F0F0F8;
     --mainGrey: #838383;
+    --white: #FFFFFF;
 }
 
 /* Global style */
@@ -44,7 +45,7 @@ html, body {
     fill: var(--backroundColor1);
 }
 
-.content {
+.backgroundContent {
     background-color: white;
     position: absolute;
     width: 1047px;
@@ -52,7 +53,6 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px 50px;
 }
 
 .mainContainer {
@@ -66,7 +66,7 @@ html, body {
     width: 100%;
     display: flex;
     justify-content: right;
-    margin: 20px;
+    margin: 20px 0;
 }
 
 .arrowContainer a {
@@ -74,6 +74,7 @@ html, body {
     align-items: center;
     color: var(--textColor);
     text-decoration: none;
+    margin: 0 50px 0 0;
 }
 
 .arrowIconContainer {
@@ -90,5 +91,60 @@ html, body {
     color: var(--textColor);
     font-weight: 600;
     font-size: 30px;
-    margin: 0;
+    margin: 0 20px 0 0;
+}
+
+.content {
+    width: 80%;
+    height: 100%;
+    margin: 0 105px 0 105px;
+}
+
+.contentTitle h1 {
+    font-weight: 700;
+    font-size: 48px;
+}
+
+.labelHome {
+    font-weight: 400;
+    font-size: 36px;
+}
+
+.textInputHome input {
+    width: 418px;
+    height: 50px;
+    border-radius: 8px;
+    border: 1px solid var(--textColor);
+    font-size: 28px;
+    padding-left: 10px;
+}
+
+.textInputHome, .submitInputHome {
+    height: 54px;
+}
+
+.submitInputHome input {
+    width: 236px;
+    height: 54px;
+    background: var(--mainColor);
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border: 0;
+    color: var(--white);
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.submitInputHome input:hover {
+    
+    cursor: pointer;
+}
+
+.submitInputHome {
+    margin: 0 0 0 20px;
+}
+
+.inputHome {
+    display: flex;
+    margin: 20px 0 0 0;
 }
