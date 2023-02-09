@@ -6,7 +6,7 @@
 /* Color variables */
 :root {
     --mainColor: #3319c8;
-    --mainColorHover: #4C32E1;
+    --mainColorHover: #5e48ec;
     --textColor: #3A3965;
 
     --backroundColor1: #b5c9ff;
@@ -75,7 +75,13 @@ html, body {
     align-items: center;
     color: var(--textColor);
     text-decoration: none;
+    transition: all .3s ease-in-out;
     margin: 0 50px 0 0;
+}
+
+.arrowContainer a:hover {
+    transition: all .3s ease-in-out;
+    margin: 0 40px 0 0;
 }
 
 .arrowIconContainer {
@@ -101,6 +107,8 @@ html, body {
     margin: 0 105px 0 105px;
 }
 
+/* Home page */
+
 .contentTitle h1 {
     font-weight: 700;
     font-size: 48px;
@@ -124,6 +132,10 @@ html, body {
     padding-left: 10px;
 }
 
+.textInputHome input:focus-visible {
+    outline: var(--textColor) solid 1px;
+}
+
 .textInputHome, .submitInputHome {
     height: 54px;
 }
@@ -138,6 +150,7 @@ html, body {
     color: var(--white);
     font-weight: 400;
     font-size: 24px;
+    transition: all 0.3s ease-out;
 }
 
 .submitInputHome input:hover {
@@ -159,7 +172,7 @@ html, body {
     margin: 30px 0 0 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-content: flex-start;
     height: 212px;
     overflow: auto;
@@ -172,7 +185,7 @@ html, body {
     background-color: var(--violetGrey);
     border-radius: 5px;
     padding: 0 10px;
-    margin: 20px 0 0 0;
+    margin: 20px 29px 0 0;
     width: 224px;
     height: 42px;
 }
@@ -180,10 +193,11 @@ html, body {
 .username p {
     font-weight: 600;
     font-size: 27px;
+    margin: 0;
 }
 
 .trashIcon svg {
     width: 25px;
     height: 25px;
-    cursor: pointer;
+    fill: var(--textColor);
 }
