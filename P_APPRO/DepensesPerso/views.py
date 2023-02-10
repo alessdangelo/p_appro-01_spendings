@@ -19,8 +19,11 @@ def addUser(request):
     if len(username) <= MAX_LENGTH_USERNAME and username:
         # Delete the space charactere at start of the user's input
         username = username.strip() 
-        # Add the username's input in the database fiels 'useName'
-        User.objects.create(useName = username) 
+        if username:
+            # Add the username's input in the database fiels 'useName'
+            User.objects.create(useName = username) 
+        else :
+            messages.error(request, "Veuillez ne pas commencer par un espace")
     else:
         messages.error(request, "Veuillez respecter le nombre de caractères autorisés (minimum 1 et maximum 13)")
 
