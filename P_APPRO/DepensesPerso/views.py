@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
 from DepensesPerso.models import User
+from django.contrib import messages
 
 # Send the index and get all the users from database.
 def index(request):
@@ -11,10 +12,12 @@ def index(request):
 # Add a user with the form
 def addUser(request):
     username = request.POST.get("username")
-    if len(username) <= 13:
+
+    # Check for the username's length and not empty
+    if len(username) <= 13 and username:
         User.objects.create(useName = username)
-    # else:
-    #     render(request, 'index.html', context = {"error": "Veuillez respecter le nombre maximal de caractères autorisés (13)"})
+    else:
+        messages.error(request, "Veuillez respecter le nombre de caractères autorisés (minimum 1 et maximum 13)")
 
     return redirect('index')
 
