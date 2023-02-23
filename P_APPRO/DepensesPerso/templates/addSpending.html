@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% comment %} Block that replace the same one from the base file {% endcomment %}
+{% block content %}
+<div class="arrowContainer">
+    <a href="#">
+        <div class="textLink">
+            <p>Revenir à la liste des dépenses</p>
+        </div>
+        <div class="arrowIconContainer">
+            <svg width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+            </svg>
+        </div>
+    </a>
+</div>
+<div class="content">
+    <div class="contentTitle">
+        <h1>Nouvelle dépense</h1>
+    </div>
+
+    {% for error in messages %}
+        <div class="error">
+            <svg viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+            </svg>
+            <p>{{ error }}</p>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock content %}
