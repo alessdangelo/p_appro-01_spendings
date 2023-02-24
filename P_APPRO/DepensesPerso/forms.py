@@ -3,11 +3,11 @@ from .models import *
 from django.forms import ModelForm
 
 
-class AddSpendingForm(forms.Form):
+class AddSpendingForm(forms.ModelForm):
     class Meta: 
         model = Spending
         fields = '__all__'
-        title = forms.CharField()
+        title = Spending.speName
         amount = forms.DecimalField()
         date = forms.DateField()
         boughtBy = forms.ChoiceField()
