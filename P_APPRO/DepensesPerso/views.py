@@ -62,3 +62,10 @@ def deleteUser(request, userId):
     username.delete()
 
     return redirect('index')
+
+# Delete a spending with the link
+def deleteSpending(request, spendingId):
+    spend = get_object_or_404(Spending, pk=spendingId)
+    spend.delete()
+
+    return redirect('listSpendings')

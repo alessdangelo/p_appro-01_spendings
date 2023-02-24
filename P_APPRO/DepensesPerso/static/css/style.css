@@ -288,6 +288,11 @@ html, body {
     font-weight: 700;
 }
 
+.spendings {
+    overflow: auto;
+    height: 620px;
+}
+
 .spending {
     display: flex;
     align-items: center;
@@ -295,6 +300,7 @@ html, body {
     background-color: var(--violetGrey);
     border-radius: 5px;
     height: 92px;
+    margin: 0 0 15px 0;
 }
 
 .spendingContent {
