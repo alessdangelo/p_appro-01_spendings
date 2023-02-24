@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-j@w_-f1uo5xqm)-u#o4&b45b#)ld8)@$9oqg3@@t%c-kv0iw+s
 DEBUG = True
 
 ALLOWED_HOSTS = []
+CRISPY_TEMPLATE_PACK = 'uni_form'
 
 
 # Application definition
@@ -37,9 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'DepensesPerso'
+    'DepensesPerso',
+    'crispy_forms',
+    'crispy_bootstrap5'
 ]
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
