@@ -1,11 +1,11 @@
 from django import forms
-from .models import Spendings
+from .models import *
 from django.forms import ModelForm
 
 
 class AddSpendingForm(forms.Form):
     class Meta: 
-        model =Spendings
+        model = Spending
         fields = '__all__'
         title = forms.CharField()
         amount = forms.DecimalField()

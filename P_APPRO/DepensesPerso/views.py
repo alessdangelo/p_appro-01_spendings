@@ -27,9 +27,9 @@ def addSpending(request):
     
     return render(request, 'addSpending.html', context = {'form': form})
 
-def spendings(request):
-    spendings = Spendings.objects.all()
-    return render(request, 'spendings.html', context={"spendings": spendings})
+def listSpendings(request):
+    spendings = Spending.objects.all()
+    return render(request, 'listSpendings.html', context={"spendings": spendings})
 
 """Page Functions"""
 
