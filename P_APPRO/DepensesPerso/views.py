@@ -3,9 +3,10 @@ from django.http import HttpResponse
 from django.template import loader
 from DepensesPerso.models import User
 from django.contrib import messages
+from .forms import AddSpendingForm
 from django.utils.html import escape
 
-# Show pages
+"""Show pages"""
 
 # Send the index and get all the users from database.
 def index(request):
@@ -17,13 +18,19 @@ def index(request):
 
 def addSpending(request):
     users = User.objects.all()
-    return render(request, 'addSpending.html')
+    
+    form = AddSpendingForm()
+    if request.method == 'POST':
+        form = AddSpendingForm(request.POST)
+        if form.is_valid():
+            form.save()
+    
+    return render(request, 'addSpending.html', context = {'form': form})
 
 def spendings(request):
     return render(request, 'spendings.html')
 
-
-# Page Functions
+"""Page Functions"""
 
 # Add a user with the form
 def addUser(request):

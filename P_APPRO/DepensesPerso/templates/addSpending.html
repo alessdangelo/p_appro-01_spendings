@@ -18,7 +18,11 @@
     <div class="contentTitle">
         <h1>Nouvelle dépense</h1>
     </div>
-
+    <form action="" method ="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit">
+    </form>
     {% for error in messages %}
         <div class="error">
             <svg viewBox="0 0 16 16">
