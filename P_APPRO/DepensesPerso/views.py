@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from DepensesPerso.models import User
 from django.contrib import messages
-import string
+from django.utils.html import escape
 
 # Show pages
 
@@ -19,6 +19,9 @@ def addSpending(request):
     users = User.objects.all()
     return render(request, 'addSpending.html')
 
+def spendings(request):
+    return render(request, 'spendings.html')
+
 
 # Page Functions
 
@@ -26,19 +29,21 @@ def addSpending(request):
 def addUser(request):
     MAX_LENGTH_USERNAME = 12  # const for the max number of allowed characters
     username = request.POST.get("username")
+    
 
     # Check for the username's length and if not empty
     if len(username) <= MAX_LENGTH_USERNAME and username:
         # Delete any space at start from the user's input
         username = username.strip()
         if username:
-            # Add the username's input in the database field 'useName'
-            User.objects.create(useName=username)
+            user, created = User.objects.get_or_create(useName=username)
+            # Verify if an object was created.
+            if not created:
+                messages.error(request, "Les doublons ne sont pas autorisés")
         else:
             messages.error(request, "Veuillez ne pas commencer par un espace")
     else:
-        messages.error(
-            request, "Veuillez respecter le nombre de caractères autorisés (minimum 1 et maximum 13)")
+        messages.error(request, "Veuillez respecter le nombre de caractères autorisés (minimum 1 et maximum 13)")
 
     return redirect('index')
 

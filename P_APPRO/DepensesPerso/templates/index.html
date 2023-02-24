@@ -4,7 +4,7 @@
 {% comment %} Block that replace the same one from the base file {% endcomment %}
 {% block content %}
 <div class="arrowContainer">
-    <a href="#">
+    <a href="{% url 'spendings' %}">
         <div class="textLink">
             <p>Accéder à l'équilibre</p>
         </div>
@@ -47,9 +47,6 @@
     </div>
     <div class="userAddedList">
         {% for user in users %}
-            <!-- {% if user.useName|length > 13 %}
-                <h1>error1</h1>
-            {% endif %} -->
             <div class="user">
                 <div class="username">
                     <p>{{ user.useName }}</p>
@@ -63,4 +60,11 @@
         {% endfor %}
     </div>
 </div>
+
+<style>
+    .backgroundContent {
+        height: 671px !important;
+    }
+</style>
+
 {% endblock content %}

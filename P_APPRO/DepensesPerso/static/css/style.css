@@ -52,7 +52,7 @@ html, body {
     background-color: white;
     position: absolute;
     width: 1047px;
-    height: 671px;
+    height: 880px; /* 880px */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -227,4 +227,115 @@ html, body {
     height: 20px;
     padding-right: 0px;
     stroke: var(--errorText);
+}
+
+
+/* SPENDINGS LIST */
+
+.links {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.arrowContainerSpendings {
+    width: auto;
+    justify-content: normal;
+}
+
+.arrowContainerSpendings a {
+    margin: 0;
+}
+
+.arrowContainerSpendings a:hover {
+    transition: all .3s ease-in-out;
+    margin: 0 -10px 0 0;
+}
+
+#returnHomeLink:hover {
+    margin: 0 0 0 -10px;
+}
+
+.textLinkReturnHome {
+    margin: 0 0 0 20px;
+}
+
+#returnHomeIcon {
+    transform: rotate(0deg);
+}
+
+.contentTitleSpendings {
+    display: flex;
+    justify-content: space-between;
+}
+
+.iconsTitle {
+    display: flex;
+    align-items: center;
+}
+
+.newIcon svg, .downloadIcon svg {
+    width: 50px;
+    height: 50px;
+    fill: var(--textColor);
+}
+
+.downloadIcon {
+    margin: 0 40px 0 0;
+}
+
+#usernameBold {
+    font-weight: 700;
+}
+
+.spending {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--violetGrey);
+    border-radius: 5px;
+    height: 92px;
+}
+
+.spendingContent {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 30px 0 0;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-evenly;
+    width: 20%;
+}
+
+.modifyIcon svg, .trashIconSpendings svg {
+    width: 35px;
+    height: 35px;
+    fill: var(--textColor);
+}
+
+.separeLigne {
+    border-left: 1px solid var(--textColor);
+    height: 70px;
+}
+
+.spendingContentLeft {
+    margin: 0 0 0 20px;
+}
+
+.spendingContentRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.spendingContentLeftTitle h1, .spendingContentRightAmount h1 {
+    margin: 0 0 11px 0;
+}
+
+.spendingContentLeftCreatedBy p, .spendingContentRightDate p {
+    margin: 0;
+    font-size: 24px;
 }
