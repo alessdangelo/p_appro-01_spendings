@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
-from DepensesPerso.models import User
+from DepensesPerso.models import *
 from django.contrib import messages
 from .forms import AddSpendingForm
 from django.utils.html import escape
@@ -28,7 +28,8 @@ def addSpending(request):
     return render(request, 'addSpending.html', context = {'form': form})
 
 def spendings(request):
-    return render(request, 'spendings.html')
+    spendings = Spendings.objects.all()
+    return render(request, 'spendings.html', context={"spendings": spendings})
 
 """Page Functions"""
 
