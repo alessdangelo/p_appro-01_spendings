@@ -5,6 +5,10 @@ from DepensesPerso.models import *
 from django.contrib import messages
 from .forms import AddSpendingForm
 from django.utils.html import escape
+from io import BytesIO
+from django.template.loader import get_template
+from django.views import View
+from xhtml2pdf import pisa
 
 """Show pages"""
 
@@ -14,8 +18,6 @@ def index(request):
     return render(request, 'index.html', context={"users": users})
 
 # Send the addSpending page and get all the users from database.
-
-
 def addSpending(request):
     users = User.objects.all()
     
@@ -43,6 +45,7 @@ def addUser(request):
     if len(username) <= MAX_LENGTH_USERNAME and username:
         # Delete any space at start from the user's input
         username = username.strip()
+        username = username.lower()
         if username:
             user, created = User.objects.get_or_create(useName=username)
             # Verify if an object was created.
@@ -69,3 +72,23 @@ def deleteSpending(request, spendingId):
     spend.delete()
 
     return redirect('listSpendings')
+
+def renderToPdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type = 'depensesPerso/download')
+    return None
+
+
+class downloadListSpendings(View):
+    def get(self, request, *args, **kwargs):
+        pdf = renderToPdf('listSpendings.html')
+        return HttpResponse(pdf, content_type = 'depensesPerso/download')
+        # response = HttpResponse(pdf, content_type = 'application/pdf')
+        # filename = "Invoice_%s.pdf" %("12341231")
+        # content = "attachment; filename='%s'" %(filename)
+        # response['Content-Disposition'] = content
+        # return response
