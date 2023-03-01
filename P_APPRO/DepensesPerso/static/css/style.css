@@ -252,11 +252,11 @@ html, body {
     margin: 0 -10px 0 0;
 }
 
-#returnHomeLink:hover {
+#returnLink:hover {
     margin: 0 0 0 -10px;
 }
 
-.textLinkReturnHome {
+.textLinkReturn {
     margin: 0 0 0 20px;
 }
 
@@ -344,4 +344,29 @@ html, body {
 .spendingContentLeftCreatedBy p, .spendingContentRightDate p {
     margin: 0;
     font-size: 24px;
+}
+
+
+/* Forms add */
+
+.arrowContainerFormsAdd {
+    justify-content: left;
+}
+
+.arrowContainerFormsAdd a {
+    justify-content: left;
+    flex-direction: row-reverse;
+    margin: 0 0 0 50px;
+}
+
+.arrowIconContainerFormsAdd {
+    transform: rotate(0deg);
+}
+
+.arrowContainerFormsAdd a {
+    margin: 0 0 0 62px;
+}
+
+.arrowContainerFormsAdd a:hover {
+    margin: 0 0 0 52px;
 }

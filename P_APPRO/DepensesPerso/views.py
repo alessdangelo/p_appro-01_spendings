@@ -9,8 +9,6 @@ from io import BytesIO
 from django.template.loader import get_template
 from django.views import View
 from xhtml2pdf import pisa
-from django.forms.models import model_to_dict
-from itertools import chain
 
 """Show pages"""
 
@@ -74,6 +72,14 @@ def deleteSpending(request, spendingId):
     spend.delete()
 
     return redirect('listSpendings')
+
+# Update a spending
+# ToDo : Wait for the add to be done
+def updateSpending(request, spendingId):
+    spending = get_object_or_404(Spending, pk=spendingId)
+
+    return redirect('listSpendings')
+
 
 # Take a template and the infos in the dictionnary to create PDF
 def renderToPdf(template_src, context_dict={}):
