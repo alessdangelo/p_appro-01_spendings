@@ -9,6 +9,8 @@ from io import BytesIO
 from django.template.loader import get_template
 from django.views import View
 from xhtml2pdf import pisa
+from django.forms.models import model_to_dict
+from itertools import chain
 
 """Show pages"""
 
@@ -73,22 +75,28 @@ def deleteSpending(request, spendingId):
 
     return redirect('listSpendings')
 
+# Take a template and the infos in the dictionnary to create PDF
 def renderToPdf(template_src, context_dict={}):
     template = get_template(template_src)
     html = template.render(context_dict)
     result = BytesIO()
-    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), result)
     if not pdf.err:
         return HttpResponse(result.getvalue(), content_type = 'depensesPerso/download')
     return None
 
-
+# Class for download the PDF
 class downloadListSpendings(View):
+
+    # Get all the spendings and store it in a dictionnary to create the PDF with the choosen template
     def get(self, request, *args, **kwargs):
-        pdf = renderToPdf('listSpendings.html')
-        return HttpResponse(pdf, content_type = 'depensesPerso/download')
-        # response = HttpResponse(pdf, content_type = 'application/pdf')
-        # filename = "Invoice_%s.pdf" %("12341231")
-        # content = "attachment; filename='%s'" %(filename)
-        # response['Content-Disposition'] = content
-        # return response
+        spendings = Spending.objects.all()
+        context = {'spendings': spendings}
+
+        pdf = renderToPdf('pdfListSpendings.html', context)
+        response = HttpResponse(pdf, content_type = 'depensesPerso/download')
+        filename = "Liste_des_dépenses.pdf"
+        content = "attachment; filename=%s" %(filename)
+        response['Content-Disposition'] = content
+
+        return response
