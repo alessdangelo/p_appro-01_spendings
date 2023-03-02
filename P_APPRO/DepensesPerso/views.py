@@ -1,14 +1,20 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from django.template import loader
-from DepensesPerso.models import *
-from django.contrib import messages
-from .forms import AddSpendingForm
-from django.utils.html import escape
+from datetime import date
 from io import BytesIO
+from itertools import chain
+
+from DepensesPerso.models import *
+from django import forms
+from django.contrib import messages
+from django.forms.models import model_to_dict
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.template import loader
 from django.template.loader import get_template
+from django.utils.html import escape
 from django.views import View
 from xhtml2pdf import pisa
+
+from .forms import AddSpendingForm
 
 """Show pages"""
 
@@ -19,14 +25,26 @@ def index(request):
 
 # Send the addSpending page and get all the users from database.
 def addSpending(request):
-    users = User.objects.all()
-    
+    #Create a new form using forms.py
     form = AddSpendingForm()
+    #True if we're using POST and that the form is valid
     if request.method == 'POST':
         form = AddSpendingForm(request.POST)
         if form.is_valid():
-            form.save()
-    
+            #Clean the data of the form
+            data = form.cleaned_data
+            users_in_debt = User.objects.filter(pk__in=data['userInDebt'])
+            #The data that will be sent to the model, formatted in a table
+            spendingsTable = Spending.objects.create(
+            speName=data['title'],
+            speAmount=data['amount'],
+            speDate=data['date'],
+            speBoughtBy=data['boughtBy'],
+            )
+            #Add and save the formatted data to the model
+            spendingsTable.speUsersInDebt.add(*users_in_debt)
+            spendingsTable.save()
+           
     return render(request, 'addSpending.html', context = {'form': form})
 
 def listSpendings(request):
@@ -91,7 +109,7 @@ def renderToPdf(template_src, context_dict={}):
         return HttpResponse(result.getvalue(), content_type = 'depensesPerso/download')
     return None
 
-# Class for download the PDF
+# Class to download as a PDF
 class downloadListSpendings(View):
 
     # Get all the spendings and store it in a dictionnary to create the PDF with the choosen template
