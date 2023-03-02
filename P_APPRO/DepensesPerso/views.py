@@ -47,6 +47,35 @@ def addSpending(request):
            
     return render(request, 'addSpending.html', context = {'form': form})
 
+# Update a spending
+# ToDo : Wait for the add to be done
+def updateSpending(request, spendingId):
+    spending = get_object_or_404(Spending, pk=spendingId)
+
+    # form = AddSpendingForm()
+
+    # if request.method == 'POST':
+    #     form = AddSpendingForm(request.POST)
+
+    #     if form.is_valid():
+    #         data = form.cleaned_data
+    #         users_in_debt = User.objects.filter(pk__in=data['userInDebt'])
+
+    #         spendingsTable = Spending.objects.filter(pk=spendingId).update(
+    #             speName=data['title'],
+    #             speAmount=data['amount'],
+    #             speDate=data['date'],
+    #             speBoughtBy=data['boughtBy'],
+    #             speUsersInDebt=users_in_debt,
+    #         )
+
+            # spendingsTable.speUsersInDebt.add(*users_in_debt)
+            # spendingsTable.save()
+           
+    # return render(request, 'updateSpending.html', context = {'form': form})
+
+    return redirect('listSpendings')
+
 def listSpendings(request):
     spendings = Spending.objects.all()
     return render(request, 'listSpendings.html', context={"spendings": spendings})
@@ -88,13 +117,6 @@ def deleteUser(request, userId):
 def deleteSpending(request, spendingId):
     spend = get_object_or_404(Spending, pk=spendingId)
     spend.delete()
-
-    return redirect('listSpendings')
-
-# Update a spending
-# ToDo : Wait for the add to be done
-def updateSpending(request, spendingId):
-    spending = get_object_or_404(Spending, pk=spendingId)
 
     return redirect('listSpendings')
 
