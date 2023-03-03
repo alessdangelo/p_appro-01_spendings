@@ -9,4 +9,4 @@ class AddSpendingForm(forms.Form):
     amount = forms.DecimalField(label='Montant')
     date = forms.DateField(label="Date")
     boughtBy = forms.ChoiceField(label="Acheteur", choices=users)
-    userInDebt = forms.MultipleChoiceField(label="Concerne", choices=users) 
+    usersInDebt = forms.MultipleChoiceField(label="Concerne", choices=users) 

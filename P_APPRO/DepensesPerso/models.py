@@ -3,10 +3,6 @@ from django.db import models
 
 class User(models.Model):
     useName = models.CharField(max_length=12)
-    # class Meta:
-    #     db_table = 't_user'
-
-# To do : fonction tostring pour afficher
 
 
 class Spending(models.Model):
@@ -14,4 +10,11 @@ class Spending(models.Model):
     speAmount = models.DecimalField(max_digits=5, decimal_places=2)
     speDate = models.DateField()
     speBoughtBy = models.CharField(max_length=20)
-    speUsersInDebt = models.ManyToManyField(User)
+    speUsersInDebtNew = models.ManyToManyField(
+        User, through='SpendingUserDebt')
+
+
+class SpendingUserDebt(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    spending = models.ForeignKey(Spending, on_delete=models.CASCADE)
+    # amount_owed = models.DecimalField(max_digits=5, decimal_places=2)

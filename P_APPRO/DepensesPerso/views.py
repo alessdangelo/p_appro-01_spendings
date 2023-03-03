@@ -33,18 +33,20 @@ def addSpending(request):
         if form.is_valid():
             #Clean the data of the form
             data = form.cleaned_data
-            users_in_debt = User.objects.filter(pk__in=data['userInDebt'])
+            print(data)
+            #TODO : Add multiple users in debt
+            #TODO : Show name instead of IDs
+            users_in_debt = User.objects.filter(pk__in=data['usersInDebt'])
             #The data that will be sent to the model, formatted in a table
-            spendingsTable = Spending.objects.create(
+            new_spending = Spending.objects.create(
             speName=data['title'],
             speAmount=data['amount'],
             speDate=data['date'],
-            speBoughtBy=data['boughtBy'],
+            speBoughtBy=data['boughtBy']
             )
             #Add and save the formatted data to the model
-            spendingsTable.speUsersInDebt.add(*users_in_debt)
-            spendingsTable.save()
-           
+            new_spending.speUsersInDebtNew.set(users_in_debt)
+            new_spending.save()
     return render(request, 'addSpending.html', context = {'form': form})
 
 # Update a spending
