@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 
 class AddSpendingForm(forms.Form):
-    users = User.objects.values_list()
+    users = [(u.pk, u.useName) for u in User.objects.all()]
     model = Spending
     fields = '__all__'
     title = forms.CharField(max_length=20, label="Titre")

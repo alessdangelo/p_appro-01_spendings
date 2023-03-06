@@ -62,7 +62,14 @@
                         <h1>{{ spending.speName }}</h1>
                     </div>
                     <div class="spendingContentLeftCreatedBy">
-                        <p>crée par <span id="usernameBold">{{ spending.speBoughtBy }}</span></p>
+                        <p>crée par <span id="usernameBold">
+                            {% comment %} Iterate through the users and print the related one{% endcomment %}
+                            {% for users in boughtBy%}
+                                {% if users.id == spending.speBoughtBy %}
+                                    {{ users.useName }}
+                                {% endif %}
+                            {% endfor %}
+                        </span></p>
                     </div>
                 </div>
                 <div class="spendingContentRight">

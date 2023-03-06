@@ -33,9 +33,6 @@ def addSpending(request):
         if form.is_valid():
             #Clean the data of the form
             data = form.cleaned_data
-            print(data)
-            #TODO : Add multiple users in debt
-            #TODO : Show name instead of IDs
             users_in_debt = User.objects.filter(pk__in=data['usersInDebt'])
             #The data that will be sent to the model, formatted in a table
             new_spending = Spending.objects.create(
@@ -46,7 +43,17 @@ def addSpending(request):
             )
             #Add and save the formatted data to the model
             new_spending.speUsersInDebtNew.set(users_in_debt)
+            # Calculate and update the amount owed for each user
+            for user in users_in_debt:
+                amount_owed = SpendingUserDebt.objects.create(
+                    user=user,
+                    spending=new_spending,
+                    amount_owed=data['amount'] / len(users_in_debt)
+                )
+                user.useAmountOwed += amount_owed.amount_owed
+            #Save the changes to the database
             new_spending.save()
+            user.save()
     return render(request, 'addSpending.html', context = {'form': form})
 
 # Update a spending
@@ -78,9 +85,12 @@ def updateSpending(request, spendingId):
 
     return redirect('listSpendings')
 
+#Page where we list every spendings
 def listSpendings(request):
     spendings = Spending.objects.all()
-    return render(request, 'listSpendings.html', context={"spendings": spendings})
+    #Dictionary to be sent to the template, with id and name of users
+    boughtBy = User.objects.all().values('id', 'useName')
+    return render(request, 'listSpendings.html', context={"spendings": spendings, "boughtBy": boughtBy})
 
 """Page Functions"""
 
@@ -88,7 +98,6 @@ def listSpendings(request):
 def addUser(request):
     MAX_LENGTH_USERNAME = 12  # const for the max number of allowed characters
     username = request.POST.get("username")
-    
 
     # Check for the username's length and if not empty
     if len(username) <= MAX_LENGTH_USERNAME and username:
