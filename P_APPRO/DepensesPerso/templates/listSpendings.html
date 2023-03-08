@@ -64,7 +64,7 @@
                     <div class="spendingContentLeftCreatedBy">
                         <p>crée par <span id="usernameBold">
                             {% comment %} Iterate through the users and print the related one{% endcomment %}
-                            {% for users in boughtBy%}
+                            {% for users in boughtBy %}
                                 {% if users.id == spending.speBoughtBy %}
                                     {{ users.useName }}
                                 {% endif %}

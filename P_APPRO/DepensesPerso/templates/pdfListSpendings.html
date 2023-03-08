@@ -44,7 +44,14 @@
             {% for spending in spendings %}
                 <tr>
                     <td class="leftAlign">{{ spending.speName }}</td>
-                    <td>{{ spending.speBoughtBy }}</td>
+                    <td>
+                        {% comment %} Iterate through the users and print the related one{% endcomment %}
+                        {% for users in boughtBy %}
+                            {% if users.id == spending.speBoughtBy %}
+                                {{ users.useName }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
                     <td>{{ spending.speAmount }}</td>
                     <td class="rightAlign">{{ spending.speDate }}</td>
                 </tr>

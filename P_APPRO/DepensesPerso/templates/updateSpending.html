@@ -17,11 +17,11 @@
 </div>
 <div class="content">
     <div class="contentTitle">
-        <h1>Nouvelle dépense</h1>
+        <h1>Modifier une dépense</h1>
     </div>
     <form action="" method ="post">
         {% csrf_token %}
-        {{ form | crispy }}
+        {{ form.as_p }}
         <input type="submit" value="Modifier">
     </form>
     {% for error in messages %}

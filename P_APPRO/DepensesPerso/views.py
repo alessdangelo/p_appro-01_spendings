@@ -15,6 +15,7 @@ from django.views import View
 from xhtml2pdf import pisa
 
 from .forms import AddSpendingForm
+from .forms import UpdateSpendingForm
 
 """Show pages"""
 
@@ -25,23 +26,23 @@ def index(request):
 
 # Send the addSpending page and get all the users from database.
 def addSpending(request):
-    #Create a new form using forms.py
+    # Create a new form using forms.py
     form = AddSpendingForm()
-    #True if we're using POST and that the form is valid
+    # True if we're using POST and that the form is valid
     if request.method == 'POST':
         form = AddSpendingForm(request.POST)
         if form.is_valid():
-            #Clean the data of the form
+            # Clean the data of the form
             data = form.cleaned_data
             users_in_debt = User.objects.filter(pk__in=data['usersInDebt'])
-            #The data that will be sent to the model, formatted in a table
+            # The data that will be sent to the model, formatted in a table
             new_spending = Spending.objects.create(
             speName=data['title'],
             speAmount=data['amount'],
             speDate=data['date'],
             speBoughtBy=data['boughtBy']
             )
-            #Add and save the formatted data to the model
+            # Add and save the formatted data to the model
             new_spending.speUsersInDebtNew.set(users_in_debt)
             # Calculate and update the amount owed for each user
             for user in users_in_debt:
@@ -51,45 +52,31 @@ def addSpending(request):
                     amount_owed=data['amount'] / len(users_in_debt)
                 )
                 user.useAmountOwed += amount_owed.amount_owed
-            #Save the changes to the database
+            # Save the changes to the database
             new_spending.save()
             user.save()
     return render(request, 'addSpending.html', context = {'form': form})
+    # else :
+    #     spending = Spending.objects.get(pk=spendingId)
+    #     form = AddSpendingForm(instance=spending)
+    #     return render(request, 'addSpending.html', context = {'form': form})
 
 # Update a spending
 # ToDo : Wait for the add to be done
 def updateSpending(request, spendingId):
-    spending = get_object_or_404(Spending, pk=spendingId)
+    spending = Spending.objects.get(pk=spendingId)
+    form = UpdateSpendingForm(instance=spending)
 
-    # form = AddSpendingForm()
+    return render(request, 'updateSpending.html', context = { 'form': form })
 
-    # if request.method == 'POST':
-    #     form = AddSpendingForm(request.POST)
+    # return redirect('listSpendings')
 
-    #     if form.is_valid():
-    #         data = form.cleaned_data
-    #         users_in_debt = User.objects.filter(pk__in=data['userInDebt'])
-
-    #         spendingsTable = Spending.objects.filter(pk=spendingId).update(
-    #             speName=data['title'],
-    #             speAmount=data['amount'],
-    #             speDate=data['date'],
-    #             speBoughtBy=data['boughtBy'],
-    #             speUsersInDebt=users_in_debt,
-    #         )
-
-            # spendingsTable.speUsersInDebt.add(*users_in_debt)
-            # spendingsTable.save()
-           
-    # return render(request, 'updateSpending.html', context = {'form': form})
-
-    return redirect('listSpendings')
-
-#Page where we list every spendings
+# Page where we list every spendings
 def listSpendings(request):
     spendings = Spending.objects.all()
-    #Dictionary to be sent to the template, with id and name of users
+    # Dictionary to be sent to the template, with id and name of users
     boughtBy = User.objects.all().values('id', 'useName')
+
     return render(request, 'listSpendings.html', context={"spendings": spendings, "boughtBy": boughtBy})
 
 """Page Functions"""
@@ -148,7 +135,8 @@ class downloadListSpendings(View):
     # Get all the spendings and store it in a dictionnary to create the PDF with the choosen template
     def get(self, request, *args, **kwargs):
         spendings = Spending.objects.all()
-        context = {'spendings': spendings}
+        boughtBy = User.objects.all().values('id', 'useName')
+        context = {'spendings': spendings, "boughtBy": boughtBy }
 
         pdf = renderToPdf('pdfListSpendings.html', context)
         response = HttpResponse(pdf, content_type = 'depensesPerso/download')

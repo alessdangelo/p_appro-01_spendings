@@ -11,8 +11,7 @@ class Spending(models.Model):
     speAmount = models.DecimalField(max_digits=5, decimal_places=2)
     speDate = models.DateField()
     speBoughtBy = models.DecimalField(max_digits=20, decimal_places=0)
-    speUsersInDebtNew = models.ManyToManyField(
-        User, through='SpendingUserDebt')
+    speUsersInDebtNew = models.ManyToManyField(User, through='SpendingUserDebt')
 
 
 class SpendingUserDebt(models.Model):
