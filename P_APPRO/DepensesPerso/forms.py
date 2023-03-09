@@ -15,8 +15,6 @@ class AddSpendingForm(forms.Form):
 
 class UpdateSpendingForm(forms.ModelForm):
 
-    # usersInDebt = forms.MultipleChoiceField(label="Concerne", widget=forms.CheckboxSelectMultiple(), choices=[(u.pk, u.useName) for u in User.objects.all()])
-
     class Meta:
         users = [(u.pk, u.useName) for u in User.objects.all()]
         model = Spending
@@ -26,7 +24,7 @@ class UpdateSpendingForm(forms.ModelForm):
         amount = forms.DecimalField()
         date = forms.DateField()
         boughtBy = forms.ChoiceField()
-        usersInDebt = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), choices=users) # (widget=forms.BooleanField)
+        usersInDebt = forms.MultipleChoiceField() 
 
         labels = {
             'speName' : 'Titre',
@@ -38,5 +36,5 @@ class UpdateSpendingForm(forms.ModelForm):
 
         widgets = {
             'speBoughtBy' : forms.Select(choices=users),
-            # 'speUsersInDebtNew' : forms.SelectMultiple(choices=users),
+            'speUsersInDebtNew' : forms.CheckboxSelectMultiple(),
         }
