@@ -53,7 +53,7 @@ def addSpending(request):
                 user.useAmountOwed += amount_owed.amount_owed
             #Save the changes to the database
             new_spending.save()
-            user.save()
+            # user.save()
     return render(request, 'addSpending.html', context = {'form': form})
 
 # Update a spending

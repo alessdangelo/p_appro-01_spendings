@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
 
 {% comment %} Block that replace the same one from the base file {% endcomment %}
 {% block content %}
@@ -19,10 +18,10 @@
     <div class="contentTitle">
         <h1>Nouvelle dépense</h1>
     </div>
-    <form action="" method ="post">
+    <form class="addSpendingForm" action="" method ="post">
         {% csrf_token %}
-        {{ form | crispy }}
-        <input type="submit">
+        {{ form.as_p }}
+        <input type="submit" value="Ajouter">
     </form>
     {% for error in messages %}
         <div class="error">

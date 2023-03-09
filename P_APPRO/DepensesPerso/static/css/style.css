@@ -370,3 +370,54 @@ html, body {
 .arrowContainerFormsAdd a:hover {
     margin: 0 0 0 52px;
 }
+
+/* Add a spending page */
+
+.addSpendingForm {
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1
+}
+.addSpendingForm>p{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start
+
+}
+.addSpendingForm>p>input, select{
+    width: 75%;
+    height: 2rem;
+    border-radius: 5px;
+    border-color: #F0F0F8;
+    border-style: solid;
+}
+
+.addSpendingForm>p>label {
+    color: var(--textColor);
+    font-size: 2rem;
+    font-weight: bold;
+}
+#id_usersInDebt{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#id_usersInDebt>div>label{
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.addSpendingForm>input{
+    width: 100%;
+    height: 2rem;
+    border-radius: 5px;
+    background-color: var(--mainColor);
+    box-shadow: 2px 2px 1px 25px 25px var(--textColor);
+    border-style: none;
+    color: var(--violetGrey);
+    cursor: pointer;
+}
