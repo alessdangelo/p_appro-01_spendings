@@ -8,7 +8,10 @@ class AddSpendingForm(forms.Form):
     fields = '__all__'
     title = forms.CharField(max_length=20, label="Titre")
     amount = forms.DecimalField(label='Montant')
-    date = forms.DateField(label="Date")
+    date = forms.DateField(label="Date", widget=forms.widgets.DateInput(attrs={
+                'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)',
+                'class': 'form-control'
+                }))
     boughtBy = forms.ChoiceField(label="Acheteur", choices=users)
     usersInDebt = forms.MultipleChoiceField(label="Concerne", choices=users)
 
