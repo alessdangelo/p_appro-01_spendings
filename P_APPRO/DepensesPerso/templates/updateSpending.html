@@ -19,7 +19,7 @@
     <div class="contentTitle">
         <h1>Modifier une dépense</h1>
     </div>
-    <form action="" method ="post">
+    <form class="SpendingForm" action="" method ="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Modifier">

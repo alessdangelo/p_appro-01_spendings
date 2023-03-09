@@ -23,7 +23,7 @@ class UpdateSpendingForm(forms.ModelForm):
     
         title = forms.CharField(max_length=20)
         amount = forms.DecimalField()
-        date = forms.DateField()
+        date = forms.DateField(input_formats='%Y-%m-%d')
         boughtBy = forms.ChoiceField()
         usersInDebt = forms.MultipleChoiceField() 
 
@@ -38,4 +38,5 @@ class UpdateSpendingForm(forms.ModelForm):
         widgets = {
             'speBoughtBy' : forms.Select(choices=users),
             'speUsersInDebtNew' : forms.CheckboxSelectMultiple(),
+            'speDate' : forms.DateInput(attrs={'type': 'date'}) # attrs={'type': 'date'}
         }

@@ -54,22 +54,27 @@ def addSpending(request):
                 user.useAmountOwed += amount_owed.amount_owed
             # Save the changes to the database
             new_spending.save()
-            # user.save()
     return render(request, 'addSpending.html', context = {'form': form})
-    # else :
-    #     spending = Spending.objects.get(pk=spendingId)
-    #     form = AddSpendingForm(instance=spending)
-    #     return render(request, 'addSpending.html', context = {'form': form})
 
 # Update a spending
-# ToDo : Wait for the add to be done
 def updateSpending(request, spendingId):
+    # Get the spending id
     spending = Spending.objects.get(pk=spendingId)
+    # Generate the Form
     form = UpdateSpendingForm(instance=spending)
 
-    return render(request, 'updateSpending.html', context = { 'form': form })
+    # True if we're using POST and that the form is valid
+    if request.method == 'POST':
+        form = UpdateSpendingForm(request.POST, instance=spending)
+        if form.is_valid():
+            # Update the existing `Spending` in the database
+            form.save()
+            # Redirect to the listing page to see the result of the update
+            return redirect('listSpendings')
+        else:
+            form = UpdateSpendingForm(instance=spending)
 
-    # return redirect('listSpendings')
+    return render(request, 'updateSpending.html', context = { 'form': form })
 
 # Page where we list every spendings
 def listSpendings(request):

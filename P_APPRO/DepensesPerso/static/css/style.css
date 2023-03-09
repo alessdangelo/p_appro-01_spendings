@@ -373,19 +373,19 @@ html, body {
 
 /* Add a spending page */
 
-.addSpendingForm {
+.SpendingForm {
     display: flex;
     flex-wrap: wrap;
     flex-grow: 1
 }
-.addSpendingForm>p{
+.SpendingForm>p{
     width: 50%;
     display: flex;
     flex-direction: column;
     align-items: flex-start
 
 }
-.addSpendingForm>p>input, select{
+.SpendingForm>p>input, select{
     width: 75%;
     height: 2rem;
     border-radius: 5px;
@@ -393,12 +393,13 @@ html, body {
     border-style: solid;
 }
 
-.addSpendingForm>p>label {
+.SpendingForm>p>label {
     color: var(--textColor);
     font-size: 2rem;
     font-weight: bold;
 }
-#id_usersInDebt{
+
+#id_usersInDebt, #id_speUsersInDebtNew {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -406,14 +407,14 @@ html, body {
     justify-content: space-between;
 }
 
-#id_usersInDebt>div>label{
+#id_usersInDebt>div>label, #id_speUsersInDebtNew>div>label {
     font-size: 1.5em;
     cursor: pointer;
 }
 
-.addSpendingForm>input{
+.SpendingForm>input{
     width: 100%;
-    height: 2rem;
+    height: 54px;
     border-radius: 5px;
     background-color: var(--mainColor);
     box-shadow: 2px 2px 1px 25px 25px var(--textColor);

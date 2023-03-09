@@ -18,7 +18,7 @@
     <div class="contentTitle">
         <h1>Nouvelle dépense</h1>
     </div>
-    <form class="addSpendingForm" action="" method ="post">
+    <form class="SpendingForm" action="" method ="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Ajouter">
