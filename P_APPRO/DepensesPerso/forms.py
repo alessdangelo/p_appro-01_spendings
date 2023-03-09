@@ -1,4 +1,5 @@
 from django import forms
+# from django.forms import *
 from .models import *
 
 class AddSpendingForm(forms.Form):
