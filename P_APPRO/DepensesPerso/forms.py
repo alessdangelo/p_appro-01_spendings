@@ -1,5 +1,4 @@
 from django import forms
-# from django.forms import *
 from .models import *
 
 class AddSpendingForm(forms.Form):
@@ -13,8 +12,7 @@ class AddSpendingForm(forms.Form):
                 'class': 'form-control'
                 }))
     boughtBy = forms.ChoiceField(label="Acheteur", choices=users)
-    usersInDebt = forms.MultipleChoiceField(label="Concerne", choices=users)
-
+    usersInDebt = forms.MultipleChoiceField(label="Concerne", choices=users, widget=forms.CheckboxSelectMultiple()) 
 
 class UpdateSpendingForm(forms.ModelForm):
 
