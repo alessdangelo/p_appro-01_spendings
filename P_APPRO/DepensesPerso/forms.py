@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 
 class AddSpendingForm(forms.Form):
-    users = [(u.pk, u.useName) for u in User.objects.all()]
+    
     model = Spending
     fields = '__all__'
     title = forms.CharField(max_length=20, label="Titre")
@@ -11,8 +11,8 @@ class AddSpendingForm(forms.Form):
                 'type': 'date', 
                 'class': 'dateForm'
                 }))
-    boughtBy = forms.ChoiceField(label="Acheteur", choices=users)
-    usersInDebt = forms.MultipleChoiceField(label="Concerne", choices=users, widget=forms.CheckboxSelectMultiple()) 
+    boughtBy = forms.ModelChoiceField(label="Acheteur",queryset=User.objects.all())
+    usersInDebt = forms.ModelMultipleChoiceField(label="Concerne", queryset=User.objects.all(), widget=forms.CheckboxSelectMultiple()) 
 
 class UpdateSpendingForm(forms.ModelForm):
 
