@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% comment %} Block that replace the same one from the base file {% endcomment %}
+{% block content %}
+<div class="arrowContainer arrowContainerFormsAdd">
+    <a href="{% url 'listSpendings' %}">
+        <div class="textLink textLinkReturn">
+            <p>Revenir à la liste des dépenses</p>
+        </div>
+        <div class="arrowIconContainer arrowIconContainerFormsAdd">
+            <svg width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+            </svg>
+        </div>
+    </a>
+</div>
+<div class="content">
+    <div class="contentTitle">
+        <h1>Equilbre des dépenses</h1>
+    </div>
+
+    <div class="balances">
+        <div class="balance">
+            <div class="balancesContent">
+                <div class="username">
+                    <h1>Utilisateur</h1>
+                </div>
+                <div class="amountOwed">
+                    <h1>+ 212 CHF</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="balancesDetails">
+        <div class="balanceDetail">
+            <div class="balancesDetailsContent">
+                <div class="usernameDetail">
+                    <h1>Utilisateur1</h1>
+                </div>
+                <div class="amountOwedDetail">
+                    <h1>doit <b>212 CHF</b> à</h1>
+                </div>
+                <div class="usernameDetail">
+                    <h1>Utilisateur2</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

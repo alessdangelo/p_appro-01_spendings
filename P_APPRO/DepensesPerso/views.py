@@ -84,6 +84,14 @@ def listSpendings(request):
 
     return render(request, 'listSpendings.html', context={"spendings": spendings, "boughtBy": boughtBy})
 
+# Page where we show the user's balance
+def balance(request):
+    spendings = Spending.objects.all()
+    # Dictionary to be sent to the template, with id and name of users
+    # boughtBy = User.objects.all().values('id', 'useName')
+
+    return render(request, 'balance.html', context={"users": spendings})
+
 """Page Functions"""
 
 # Add a user with the form

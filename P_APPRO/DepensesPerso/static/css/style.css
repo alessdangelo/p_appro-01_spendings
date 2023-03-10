@@ -293,7 +293,7 @@ html, body {
     height: 620px;
 }
 
-.spending {
+.spending, .balance {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -417,6 +417,8 @@ html, body {
     justify-content: flex-start; 
     font-weight: bold;
     font-size: 26px;
+    height: 130px;
+    overflow: auto;
 }
 
 #id_speUsersInDebtNew > div > label > input, #id_usersInDebt > div > label > input {
@@ -425,7 +427,7 @@ html, body {
 }
 
 #id_speUsersInDebtNew > div, #id_usersInDebt > div {
-    width: 209px;
+    width: 205px;
     height: 38px;
     margin: 0 0 10px 0;
 }
@@ -446,7 +448,7 @@ html, body {
     font-size: 24px;
     font-weight: 400;
     transition: all 0.3s ease-out;
-    margin: 25px 0 0 0;
+    margin: 5px 0 0 0;
 }
 
 .SpendingForm > button {
@@ -478,4 +480,30 @@ html, body {
 #id_speBoughtBy, #id_boughtBy {
     height: 45px;
     width: 366px;
+}
+
+
+/* BALANCE */
+
+.balancesContent {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.balances {
+    overflow: auto;
+    height: 428px;
+}
+
+.balancesDetails {
+    display: flex;
+}
+
+.balanceDetail {
+    width: 279.198px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
 }

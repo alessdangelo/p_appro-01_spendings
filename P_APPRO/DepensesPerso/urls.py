@@ -9,5 +9,6 @@ urlpatterns = [
     path('listSpendings/', views.listSpendings, name="listSpendings"),
     path('deleteSpending/<int:spendingId>', views.deleteSpending, name='deleteSpending'),
     path('download/', views.downloadListSpendings.as_view(), name="downloadListSpendings"),
-    path('updateSpending/<int:spendingId>/', views.updateSpending, name="updateSpending")
+    path('updateSpending/<int:spendingId>/', views.updateSpending, name="updateSpending"),
+    path('balance', views.balance, name="balance")
 ]
