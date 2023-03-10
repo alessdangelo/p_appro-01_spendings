@@ -21,7 +21,8 @@
     <form class="SpendingForm" action="" method ="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Ajouter">
+        <input type="submit" name="btnSubmit" value="Ajouter">
+        <button type="reset" id="btnDelete" name="btnDelete">Effacer</button>
     </form>
     {% for error in messages %}
         <div class="error">

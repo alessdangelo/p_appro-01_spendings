@@ -53,7 +53,7 @@
                         {% endfor %}
                     </td>
                     <td>{{ spending.speAmount }}</td>
-                    <td class="rightAlign">{{ spending.speDate }}</td>
+                    <td class="rightAlign">{{ spending.speDate | date:"d F Y"}}</td>
                 </tr>
             {% endfor %}
         </tbody>

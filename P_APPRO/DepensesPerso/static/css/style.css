@@ -156,7 +156,7 @@ html, body {
     transition: all 0.3s ease-out;
 }
 
-.submitInputHome input:hover {
+.submitInputHome input:hover, .SpendingForm > input:hover {
     background-color: var(--mainColorHover);
     transition: all 0.3s ease-out;
     cursor: pointer;
@@ -378,47 +378,104 @@ html, body {
     flex-wrap: wrap;
     flex-grow: 1
 }
-.SpendingForm>p{
+
+.SpendingForm > p {
     width: 50%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start
-
+    position: relative;
 }
-.SpendingForm>p>input, select{
-    width: 75%;
-    height: 2rem;
+
+.SpendingForm > p:nth-child(3), p:nth-child(5) {
+    left: 50px;
+}
+
+.SpendingForm > p:nth-child(4), p:nth-child(5), p:nth-child(6) {
+    margin-top: 25px;
+}
+
+.SpendingForm > p > input, select {
+    width: 350px;
+    height: 39px;
     border-radius: 5px;
-    border-color: #F0F0F8;
-    border-style: solid;
+    border: 2px solid var(--violetGrey);
+    font-size: 26px;
+    padding-left: 10px;
+    color: var(--textColor);
 }
 
-.SpendingForm>p>label {
+.SpendingForm> p > label {
     color: var(--textColor);
-    font-size: 2rem;
+    font-size: 36px;
     font-weight: bold;
 }
 
 #id_usersInDebt, #id_speUsersInDebtNew {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start; 
+    font-weight: bold;
+    font-size: 26px;
 }
 
-#id_usersInDebt>div>label, #id_speUsersInDebtNew>div>label {
-    font-size: 1.5em;
+#id_speUsersInDebtNew > div > label > input, #id_usersInDebt > div > label > input {
+    width: 20px;
+    height: 20px;
+}
+
+#id_speUsersInDebtNew > div, #id_usersInDebt > div {
+    width: 209px;
+    height: 38px;
+    margin: 0 0 10px 0;
+}
+
+#id_usersInDebt > div > label, #id_speUsersInDebtNew > div > label {
     cursor: pointer;
 }
 
-.SpendingForm>input{
+.SpendingForm > input {
     width: 100%;
     height: 54px;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: var(--mainColor);
-    box-shadow: 2px 2px 1px 25px 25px var(--textColor);
+    box-shadow: 2px 2px 30px rgb(0 0 0 / 20%);
     border-style: none;
     color: var(--violetGrey);
     cursor: pointer;
+    font-size: 24px;
+    font-weight: 400;
+    transition: all 0.3s ease-out;
+    margin: 25px 0 0 0;
+}
+
+.SpendingForm > button {
+    width: 100%;
+    height: 54px;
+    border-radius: 10px;
+    background-color: var(--white);
+    box-shadow: 2px 2px 30px rgb(0 0 0 / 20%);
+    border: 3px solid var(--mainColor);
+    color: var(--mainColor);
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: 400;
+    transition: all 0.3s ease-out;
+    margin: 25px 0 0 0;
+}
+
+.SpendingForm > button:hover {
+    border-color: var(--mainColorHover);
+    color: var(--mainColorHover);
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+}
+
+.dateForm {
+    height: 41px !important;
+}
+
+#id_speBoughtBy, #id_boughtBy {
+    height: 45px;
+    width: 366px;
 }

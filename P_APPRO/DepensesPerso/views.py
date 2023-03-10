@@ -110,6 +110,7 @@ def addUser(request):
 
 
 # Delete a user with the link
+# Todo : check and delete only if user has not created any spending
 def deleteUser(request, userId):
     username = get_object_or_404(User, pk=userId)
     username.delete()

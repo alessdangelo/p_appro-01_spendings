@@ -8,8 +8,8 @@ class AddSpendingForm(forms.Form):
     title = forms.CharField(max_length=20, label="Titre")
     amount = forms.DecimalField(label='Montant')
     date = forms.DateField(label="Date", widget=forms.widgets.DateInput(attrs={
-                'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)',
-                'class': 'form-control'
+                'type': 'date', 
+                'class': 'dateForm'
                 }))
     boughtBy = forms.ChoiceField(label="Acheteur", choices=users)
     usersInDebt = forms.MultipleChoiceField(label="Concerne", choices=users, widget=forms.CheckboxSelectMultiple()) 
@@ -23,7 +23,7 @@ class UpdateSpendingForm(forms.ModelForm):
     
         title = forms.CharField(max_length=20)
         amount = forms.DecimalField()
-        date = forms.DateField(input_formats='%Y-%m-%d')
+        date = forms.DateField(input_formats='%d-%m-%Y')
         boughtBy = forms.ChoiceField()
         usersInDebt = forms.MultipleChoiceField() 
 
@@ -38,5 +38,5 @@ class UpdateSpendingForm(forms.ModelForm):
         widgets = {
             'speBoughtBy' : forms.Select(choices=users),
             'speUsersInDebtNew' : forms.CheckboxSelectMultiple(),
-            'speDate' : forms.DateInput(attrs={'type': 'date'}) # attrs={'type': 'date'}
+            'speDate' : forms.DateInput(attrs={'type': 'date', 'class': 'dateForm' })
         }
