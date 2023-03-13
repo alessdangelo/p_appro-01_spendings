@@ -35,6 +35,13 @@ def addSpending(request):
             # Clean the data of the form
             data = form.cleaned_data
             users_in_debt = User.objects.filter(pk__in=data['usersInDebt'])
+
+            # 
+            for u in User.objects.all():
+                if u == data['boughtBy']:
+                    data['boughtBy'] = u.pk
+                    print(type(data['boughtBy']))
+            
             # The data that will be sent to the model, formatted in a table
             new_spending = Spending.objects.create(
             speName=data['title'],
@@ -66,13 +73,35 @@ def updateSpending(request, spendingId):
     # True if we're using POST and that the form is valid
     if request.method == 'POST':
         form = UpdateSpendingForm(request.POST, instance=spending)
+        # boughtBy = Decimal(form.data['speBoughtBy'])
+
+        # for u in User.objects.all():
+        #     if u.pk == int(form.data['speBoughtBy']):
+        #         form.data._mutable = True
+        #         form.data['speBoughtBy'] = u.pk
+        #         # print(type(u.pk)) 
+        #         print(type(form.data['speBoughtBy']))
+        #         # form.data.update(speBoughtBy = u.pk)
+        #         print('test reussi')
+
+        
+        form.data._mutable = True
+        form.data['speBoughtBy'] = str(form.data['speBoughtBy'])
+        # print(type(form.data['speBoughtBy']))
+        # print(form.data['speBoughtBy'])
+
         if form.is_valid():
+            print(type(form.data['speBoughtBy']))
+            print(form.data['speBoughtBy'])
             # Update the existing `Spending` in the database
             form.save()
             # Redirect to the listing page to see the result of the update
             return redirect('listSpendings')
         else:
+            print(form.errors.as_data())
             form = UpdateSpendingForm(instance=spending)
+            # print(form)
+            # print('test')
 
     return render(request, 'updateSpending.html', context = { 'form': form })
 

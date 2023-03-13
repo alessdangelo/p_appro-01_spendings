@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 
+# 
 class AddSpendingForm(forms.Form):
     
     model = Spending
@@ -11,9 +12,11 @@ class AddSpendingForm(forms.Form):
                 'type': 'date', 
                 'class': 'dateForm'
                 }))
-    boughtBy = forms.ModelChoiceField(label="Acheteur",queryset=User.objects.all())
+    boughtBy = forms.ModelChoiceField(label="Acheteur", queryset=User.objects.all())
     usersInDebt = forms.ModelMultipleChoiceField(label="Concerne", queryset=User.objects.all(), widget=forms.CheckboxSelectMultiple()) 
 
+
+# 
 class UpdateSpendingForm(forms.ModelForm):
 
     class Meta:
@@ -40,3 +43,8 @@ class UpdateSpendingForm(forms.ModelForm):
             'speUsersInDebtNew' : forms.CheckboxSelectMultiple(),
             'speDate' : forms.DateInput(attrs={'type': 'date', 'class': 'dateForm' })
         }
+
+    # 
+    # def __init__(self, *args, **kwargs):
+    #      super().__init__(*args, **kwargs)
+    #      self.fields['speBoughtBy'] = forms.ModelChoiceField(queryset=User.objects.all(), label='Acheteur')

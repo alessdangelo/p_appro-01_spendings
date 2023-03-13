@@ -13,7 +13,7 @@ class Spending(models.Model):
     speName = models.CharField(max_length=24)
     speAmount = models.DecimalField(max_digits=5, decimal_places=2)
     speDate = models.DateField()
-    speBoughtBy = models.DecimalField(max_digits=20, decimal_places=0)
+    speBoughtBy = models.PositiveIntegerField()
     speUsersInDebtNew = models.ManyToManyField(User, through='SpendingUserDebt')
 
     def __str__(self):
