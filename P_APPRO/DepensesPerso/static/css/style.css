@@ -494,16 +494,32 @@ html, body {
 
 .balances {
     overflow: auto;
-    height: 428px;
+    height: 350px;
 }
 
 .balancesDetails {
     display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    height: 250px;
+    overflow: auto;
+    margin: 30px 0 0 0;
 }
 
 .balanceDetail {
-    width: 279.198px;
+    width: 263px;
     height: 200px;
     display: flex;
     justify-content: center;
+    background-color: var(--violetGrey);
+    border-radius: 5px;
+    margin: 0 10px 20px 0;
+}
+
+.amountOwedDetail p {
+    font-size: 20px;
+}
+
+.balancesDetailsContent {
+    text-align: center;
 }

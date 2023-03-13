@@ -36,12 +36,13 @@ def addSpending(request):
             data = form.cleaned_data
             users_in_debt = User.objects.filter(pk__in=data['usersInDebt'])
 
-            # 
+            # Translate the boughtBy to be the user's primary key
             for u in User.objects.all():
                 if u == data['boughtBy']:
                     data['boughtBy'] = u.pk
-                    print(type(data['boughtBy']))
-            
+                    # Add the amount that has been spent the the correct user
+                    User.objects.filter(pk=u.pk).update(useAmountOwed=data['amount'])
+
             # The data that will be sent to the model, formatted in a table
             new_spending = Spending.objects.create(
             speName=data['title'],
@@ -49,6 +50,7 @@ def addSpending(request):
             speDate=data['date'],
             speBoughtBy=data['boughtBy']
             )
+            print(data['boughtBy'])
             # Add and save the formatted data to the model
             new_spending.speUsersInDebtNew.set(users_in_debt)
             # Calculate and update the amount owed for each user
@@ -58,9 +60,11 @@ def addSpending(request):
                     spending=new_spending,
                     amount_owed=data['amount'] / len(users_in_debt)
                 )
-                user.useAmountOwed += amount_owed.amount_owed
+                user.useAmountOwed -= amount_owed.amount_owed
+
             # Save the changes to the database
             new_spending.save()
+            user.save()
     return render(request, 'addSpending.html', context = {'form': form})
 
 # Update a spending
@@ -85,14 +89,14 @@ def updateSpending(request, spendingId):
         #         print('test reussi')
 
         
-        form.data._mutable = True
-        form.data['speBoughtBy'] = str(form.data['speBoughtBy'])
+        # form.data._mutable = True
+        # form.data['speBoughtBy'] = str(form.data['speBoughtBy'])
         # print(type(form.data['speBoughtBy']))
         # print(form.data['speBoughtBy'])
 
         if form.is_valid():
-            print(type(form.data['speBoughtBy']))
-            print(form.data['speBoughtBy'])
+            # print(type(form.data['speBoughtBy']))
+            # print(form.data['speBoughtBy'])
             # Update the existing `Spending` in the database
             form.save()
             # Redirect to the listing page to see the result of the update
@@ -108,6 +112,7 @@ def updateSpending(request, spendingId):
 # Page where we list every spendings
 def listSpendings(request):
     spendings = Spending.objects.all()
+
     # Dictionary to be sent to the template, with id and name of users
     boughtBy = User.objects.all().values('id', 'useName')
 
@@ -117,9 +122,9 @@ def listSpendings(request):
 def balance(request):
     spendings = Spending.objects.all()
     # Dictionary to be sent to the template, with id and name of users
-    # boughtBy = User.objects.all().values('id', 'useName')
+    users = User.objects.all()
 
-    return render(request, 'balance.html', context={"users": spendings})
+    return render(request, 'balance.html', context={"users": spendings, "users": users})
 
 """Page Functions"""
 
@@ -135,7 +140,7 @@ def addUser(request):
         username = username.lower()
         if username:
             user, created = User.objects.get_or_create(useName=username)
-            # Verify if an object was created.
+            # Verify if an object was created
             if not created:
                 messages.error(request, "Les doublons ne sont pas autorisés")
         else:
@@ -147,10 +152,16 @@ def addUser(request):
 
 
 # Delete a user with the link
-# Todo : check and delete only if user has not created any spending
 def deleteUser(request, userId):
-    username = get_object_or_404(User, pk=userId)
-    username.delete()
+    # Get only the spending that the user that is wanted to be deleted bought
+    bought = Spending.objects.filter(speBoughtBy=userId)
+
+    # Check if the user that is wanted to be deleted bought something, if not delete the user
+    if bought:
+        messages.error(request, 'Vous ne pouvez pas supprimer un utilisateur ayant créé une dépense')
+    else:
+        username = get_object_or_404(User, pk=userId)
+        username.delete()
 
     return redirect('index')
 

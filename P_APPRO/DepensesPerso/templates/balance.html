@@ -21,17 +21,26 @@
     </div>
 
     <div class="balances">
-        <div class="balance">
-            <div class="balancesContent">
-                <div class="username">
-                    <h1>Utilisateur</h1>
+        {% for user in users %}
+            {% if user.useAmountOwed != 0 %}
+                <div class="balance">
+                    <div class="balancesContent">
+                        <div class="username">
+                            <h1>{{ user.useName }}</h1>
+                        </div>
+                        <div class="amountOwed">
+                            {% if user.useAmountOwed > 0 %}
+                                <h1>+{{ user.useAmountOwed  }}</h1>
+                            {% else %}
+                                <h1>{{ user.useAmountOwed  }}</h1>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-                <div class="amountOwed">
-                    <h1>+ 212 CHF</h1>
-                </div>
-            </div>
-        </div>
+            {% endif %}
+        {% endfor %}
     </div>
+
     <div class="balancesDetails">
         <div class="balanceDetail">
             <div class="balancesDetailsContent">
@@ -39,7 +48,7 @@
                     <h1>Utilisateur1</h1>
                 </div>
                 <div class="amountOwedDetail">
-                    <h1>doit <b>212 CHF</b> à</h1>
+                    <p>doit <b>212 CHF</b> à</p>
                 </div>
                 <div class="usernameDetail">
                     <h1>Utilisateur2</h1>
