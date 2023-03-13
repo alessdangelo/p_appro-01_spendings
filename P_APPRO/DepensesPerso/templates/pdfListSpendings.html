@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    h1 {
+        font-size: 30px;
+    }
+
+    td {
+        font-size: 20px;
+    }
+
+    th {
+        font-size: 25px;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    tr {
+        padding: 10px 0 0 0;
+    }
+
+    .rightAlign {
+        text-align: right;
+    }
+
+    .leftAlign {
+        text-align: left;
+    }
+</style>
+
+<h1>Récapitulatif de toutes les dépenses :</h1>
+    <table>
+        <thead>
+            <th class="leftAlign">Nom</th>
+            <th>Crée par</th>
+            <th>Montant</th>
+            <th class="rightAlign">Date</th>
+        </thead>
+        <tbody>
+            {% for spending in spendings %}
+                <tr>
+                    <td class="leftAlign">{{ spending.speName }}</td>
+                    <td>
+                        {% comment %} Iterate through the users and print the related one{% endcomment %}
+                        {% for users in boughtBy %}
+                            {% if users.id == spending.speBoughtBy %}
+                                {{ users.useName }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ spending.speAmount }}</td>
+                    <td class="rightAlign">{{ spending.speDate | date:"d F Y"}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock content %}

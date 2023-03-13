@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-j@w_-f1uo5xqm)-u#o4&b45b#)ld8)@$9oqg3@@t%c-kv0iw+s
 DEBUG = True
 
 ALLOWED_HOSTS = []
+CRISPY_TEMPLATE_PACK = 'uni_form'
 
 
 # Application definition
@@ -37,9 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'DepensesPerso'
+    'DepensesPerso',
+    'crispy_forms',
+    'crispy_bootstrap5'
 ]
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -112,6 +117,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+USE_L10N = False
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -122,3 +129,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DATE_FORMAT = "%Y-%m-%d"
